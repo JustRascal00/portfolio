@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alex Chen | Portfolio",
-  description: "Senior Web3 Developer Portfolio",
+  title: "Mamuka Khokerashvili | Portfolio",
+  description: "Full-Stack Developer Portfolio",
 };
 
 export default function RootLayout({

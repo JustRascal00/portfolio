@@ -61,9 +61,18 @@ export default function Home() {
             </div>
             <p className="mt-4 font-mono text-emerald-300">
               <span className="whitespace-nowrap">
-                <Typewriter text="Developer Portfolio" speedCps={34} cursorChar="|" />
+                <Typewriter text="Developer's Portfolio" speedCps={34} cursorChar="|" />
               </span>
             </p>
+            <div className="mt-8 font-mono">
+              <p className="text-emerald-400">Portfolio Information:</p>
+              <div className="mt-2 grid gap-1 text-sm">
+                <p className="text-emerald-100/90"><span className="text-emerald-400">Name:</span> Mamuka Khokerashvili</p>
+                <p className="text-emerald-100/90"><span className="text-emerald-400">Based in:</span> Tbilisi, Georgia</p>
+                <p className="text-emerald-100/90"><span className="text-emerald-400">Profession:</span> Full-Stack Developer</p>
+                <p className="text-emerald-100/90"><span className="text-emerald-400">Availability:</span> Available Now</p>
+              </div>
+            </div>
           </div>
           <div className="hidden md:block">
             <div className="overflow-hidden rounded-lg relative h-[200px] md:h-[260px] lg:h-[320px] xl:h-[380px]">
@@ -81,32 +90,39 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section id="about" className="mt-16">
+        <section id="tech-stack" className="mt-16">
           <div className="terminal-border rounded-md p-6 md:p-8">
-            <p className="font-mono text-emerald-400 mb-3 flex items-center gap-2">
-              <span className="neon-text">&gt;_</span>
-              <span className="text-emerald-400">mamuka@portfolio</span>
-              <span className="text-emerald-700">:~$</span>
-              <span>about</span>
-            </p>
-            <h2 className="font-mono text-xl text-emerald-400 mb-4">About</h2>
-            <p className="max-w-3xl text-emerald-100/90">
-              Full-stack developer passionate about building dynamic and scalable web apps using React, Next.js, Python, and Laravel — turning complex ideas into clean, efficient, and user-friendly solutions.
-            </p>
-            <div className="mt-6 terminal-border rounded-md p-6">
-              <p className="font-mono text-emerald-400">
-                <Typewriter text="Portfolio Information:" speedCps={40} cursorChar="|" />
-              </p>
-              <div className="mt-4 grid gap-1 font-mono text-sm">
-                <p><Typewriter text="Name: Mamuka Khokerashvili" speedCps={40} cursorChar="|" /></p>
-                <p><Typewriter text="Based in: Tbilisi, Georgia" speedCps={40} cursorChar="|" /></p>
-                <p><Typewriter text="Profession: Senior Web3 Developer" speedCps={40} cursorChar="|" /></p>
-                <p><Typewriter text="Email: mamuka.khokharashvili00@gmail.com" speedCps={40} cursorChar="|" /></p>
+            <p className="font-mono text-emerald-400">$ cat /etc/tech-stack</p>
+            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+              <div className="terminal-border rounded-md p-6 text-center">
+                <div className="text-3xl mb-3">🧩</div>
+                <h4 className="font-mono text-emerald-400">Frontend</h4>
+                <p className="mt-2 text-emerald-100/90">React, Next.js, Tailwind CSS, Three.js</p>
+              </div>
+              <div className="terminal-border rounded-md p-6 text-center">
+                <div className="text-3xl mb-3">⚙️</div>
+                <h4 className="font-mono text-emerald-400">Backend</h4>
+                <p className="mt-2 text-emerald-100/90">Laravel (PHP), Node.js/Express, Python/FastAPI</p>
+              </div>
+              <div className="terminal-border rounded-md p-6 text-center">
+                <div className="text-3xl mb-3">🗄️</div>
+                <h4 className="font-mono text-emerald-400">Databases</h4>
+                <p className="mt-2 text-emerald-100/90">MySQL, PostgreSQL, MongoDB, Redis, Firebase</p>
+              </div>
+              <div className="terminal-border rounded-md p-6 text-center">
+                <div className="text-3xl mb-3">☁️</div>
+                <h4 className="font-mono text-emerald-400">Tools & Cloud</h4>
+                <p className="mt-2 text-emerald-100/90">Docker, Git & GitHub, Postman, AWS, Google Cloud, Vercel</p>
               </div>
             </div>
           </div>
         </section>
-
+        <section className="mt-16">
+          <h2 className="font-mono text-xl text-emerald-400 mb-4">Welcome to Mamuka Khokerashvili's Developer Portfolio!</h2>
+          <p className="max-w-3xl text-emerald-100/90">
+          Full-stack developer passionate about building dynamic and scalable web apps using React, Next.js, Python, and Laravel — turning complex ideas into clean, efficient, and user-friendly solutions.
+          </p>
+        </section>
         <section id="projects" className="mt-16">
           <div className="terminal-border rounded-md p-6 md:p-8">
             <p className="font-mono text-emerald-400 mb-3">Featured Project:</p>

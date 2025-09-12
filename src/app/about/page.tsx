@@ -64,19 +64,23 @@ export default function AboutPage() {
           <div className="mt-10">
             <p className="font-mono text-emerald-400">$ cat /etc/tech-stack</p>
             <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <div className="terminal-border rounded-md p-4 text-center">
+              <div className="terminal-border rounded-md p-6 text-center">
+                <div className="text-3xl mb-3">🧩</div>
                 <h4 className="font-mono text-emerald-400">Frontend</h4>
                 <p className="mt-2 text-emerald-100/90">React, Next.js, Tailwind CSS, Three.js</p>
               </div>
-              <div className="terminal-border rounded-md p-4 text-center">
+              <div className="terminal-border rounded-md p-6 text-center">
+                <div className="text-3xl mb-3">⚙️</div>
                 <h4 className="font-mono text-emerald-400">Backend</h4>
                 <p className="mt-2 text-emerald-100/90">Laravel (PHP), Node.js/Express, Python/FastAPI</p>
               </div>
-              <div className="terminal-border rounded-md p-4 text-center">
+              <div className="terminal-border rounded-md p-6 text-center">
+                <div className="text-3xl mb-3">🗄️</div>
                 <h4 className="font-mono text-emerald-400">Databases</h4>
                 <p className="mt-2 text-emerald-100/90">MySQL, PostgreSQL, MongoDB, Redis, Firebase</p>
               </div>
-              <div className="terminal-border rounded-md p-4 text-center">
+              <div className="terminal-border rounded-md p-6 text-center">
+                <div className="text-3xl mb-3">☁️</div>
                 <h4 className="font-mono text-emerald-400">Tools & Cloud</h4>
                 <p className="mt-2 text-emerald-100/90">Docker, Git & GitHub, Postman, AWS, Google Cloud, Vercel</p>
               </div>
