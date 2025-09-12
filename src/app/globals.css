@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
+/* Terminal theme variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --terminal-bg: #050505; /* near-black base */
+  --terminal-bg-2: #0a0f0c; /* subtle green vignette */
+  --terminal-foreground: #b6ffd3; /* pale neon */
+  --terminal-accent: #22c55e; /* emerald */
+  --terminal-accent-strong: #34f37e; /* neon */
+  --terminal-muted: #6ee7b7;
+  --terminal-border: rgba(52, 243, 126, 0.35);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: var(--terminal-bg);
+  --color-foreground: var(--terminal-foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base document styling */
+html, body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, var(--terminal-bg-2), transparent 70%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0) 0px,
+      rgba(0, 0, 0, 0) 2px,
+      rgba(0, 0, 0, 0.25) 3px
+    ),
+    var(--terminal-bg);
+  color: var(--terminal-foreground);
+}
+
+/* Utility classes for terminal aesthetic */
+.terminal-border {
+  border: 1px solid var(--terminal-border);
+  box-shadow:
+    0 0 0 1px rgba(52, 243, 126, 0.12) inset,
+    0 0 24px rgba(34, 197, 94, 0.18);
+}
+
+.neon-text {
+  color: var(--terminal-foreground);
+  text-shadow: 0 0 8px rgba(52, 243, 126, 0.35);
+}
+
+.availability-dot {
+  width: 8px;
+  height: 8px;
+  background: #22d3ee;
+  border-radius: 9999px;
+  box-shadow: 0 0 8px #22d3ee;
+}
+
+.scanlines:before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.03),
+    rgba(255, 255, 255, 0.03) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+.crt-sweep:after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(52, 243, 126, 0) 0%,
+    rgba(52, 243, 126, 0.08) 10%,
+    rgba(52, 243, 126, 0.16) 12%,
+    rgba(52, 243, 126, 0.08) 14%,
+    rgba(52, 243, 126, 0) 20%
+  );
+  mix-blend-mode: screen;
+  transform: translateY(-100%);
+  animation: crtSweep 7s linear infinite;
+}
+
+@keyframes crtSweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-sweep:after { animation: none; opacity: 0; }
+}
+
+.ascii-box {
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  background: rgba(34, 197, 94, 0.04);
+}
+
+/* Inner overlay for portrait container */
+.inner-crt-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(34,197,94,0.15), transparent 60%),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  mix-blend-mode: screen;
+}
+
+.nav-link {
+  transition: color 150ms ease, text-shadow 150ms ease;
+}
+.nav-link:hover {
+  color: var(--terminal-accent-strong);
+  text-shadow: 0 0 6px rgba(52, 243, 126, 0.45);
+}
+
+/* Typewriter cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 0.6ch;
+  color: var(--terminal-foreground);
+  margin-left: 2px;
+  animation: blink 1s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typewriter-cursor { animation: none; }
 }
