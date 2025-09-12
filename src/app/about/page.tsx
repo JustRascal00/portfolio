@@ -52,12 +52,12 @@ export default function AboutPage() {
           <div className="mt-10">
             <p className="font-mono text-emerald-400">$ cat /etc/specialties</p>
             <ul className="mt-3 list-disc pl-6 text-emerald-100/90 space-y-1">
-              <li>Full‑Stack Web Development (React, Next.js, Laravel, FastAPI)</li>
-              <li>API Development & Integration (Python, PHP)</li>
+              <li>Full-Stack Web Development (React, Next.js, Python, Laravel/PHP)</li>
+              <li>REST API Development & Integration</li>
               <li>Database Design & Optimization (MySQL, PostgreSQL, MongoDB)</li>
-              <li>Real‑time Messaging & WebSockets (Socket.io, Pusher)</li>
-              <li>DevOps & Cloud (Docker, AWS, Vercel)</li>
-              <li>UI/UX & Testing (Figma, PyTest)</li>
+              <li>CMS Development & Customization (Joomla)</li>
+              <li>Debugging, Code Optimization & Maintenance</li>
+              <li>Strong Problem-Solving & Result-Oriented Approach</li>
             </ul>
           </div>
 

@@ -81,6 +81,31 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <section id="about" className="mt-16">
+          <div className="terminal-border rounded-md p-6 md:p-8">
+            <p className="font-mono text-emerald-400 mb-3 flex items-center gap-2">
+              <span className="neon-text">&gt;_</span>
+              <span className="text-emerald-400">mamuka@portfolio</span>
+              <span className="text-emerald-700">:~$</span>
+              <span>about</span>
+            </p>
+            <h2 className="font-mono text-xl text-emerald-400 mb-4">About</h2>
+            <p className="max-w-3xl text-emerald-100/90">
+              Full-stack developer passionate about building dynamic and scalable web apps using React, Next.js, Python, and Laravel — turning complex ideas into clean, efficient, and user-friendly solutions.
+            </p>
+            <div className="mt-6 terminal-border rounded-md p-6">
+              <p className="font-mono text-emerald-400">
+                <Typewriter text="Portfolio Information:" speedCps={40} cursorChar="|" />
+              </p>
+              <div className="mt-4 grid gap-1 font-mono text-sm">
+                <p><Typewriter text="Name: Mamuka Khokerashvili" speedCps={40} cursorChar="|" /></p>
+                <p><Typewriter text="Based in: Tbilisi, Georgia" speedCps={40} cursorChar="|" /></p>
+                <p><Typewriter text="Profession: Senior Web3 Developer" speedCps={40} cursorChar="|" /></p>
+                <p><Typewriter text="Email: mamuka.khokharashvili00@gmail.com" speedCps={40} cursorChar="|" /></p>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section id="projects" className="mt-16">
           <div className="terminal-border rounded-md p-6 md:p-8">
