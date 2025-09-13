@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
+import LanguageToggle from "../components/LanguageToggle";
+import { useI18n } from "../components/i18n";
 
 export default function AboutPage() {
+  const { t } = useI18n();
   return (
     <div className="scanlines crt-sweep min-h-screen w-full">
       <header className="sticky top-0 z-40 backdrop-blur-sm bg-black/30">
@@ -11,13 +15,14 @@ export default function AboutPage() {
             <span className="text-emerald-700">:~$</span>
           </a>
           <nav className="hidden md:flex items-center gap-6 font-mono text-sm">
-            <a className="nav-link" href="/about">About</a>
-            <a className="nav-link" href="/#projects">Projects</a>
-            <a className="nav-link" href="/#experience">Experience</a>
-            <a className="nav-link" href="/#contact">Contact</a>
+            <a className="nav-link" href="/about">{t('nav.about')}</a>
+            <a className="nav-link" href="/#projects">{t('nav.projects')}</a>
+            <a className="nav-link" href="/#experience">{t('nav.experience')}</a>
+            <a className="nav-link" href="/#contact">{t('nav.contact')}</a>
             <div className="flex items-center gap-2">
               <span className="availability-dot" />
-              <span className="text-emerald-300">Available</span>
+              <span className="text-emerald-300">{t('nav.available')}</span>
+              <LanguageToggle />
             </div>
           </nav>
         </div>
@@ -30,15 +35,15 @@ export default function AboutPage() {
             <span className="neon-text">&gt;_</span>
             <span className="text-emerald-400">mamuka@portfolio</span>
             <span className="text-emerald-700">:~$</span>
-            <span>about</span>
+            <span>{t('about.cmd')}</span>
           </p>
 
           <div className="grid md:grid-cols-[1fr_260px] gap-8 items-start">
             <div>
-              <h1 className="font-mono text-xl text-emerald-400 mb-4">About Mamuka</h1>
-              <p className="font-mono text-emerald-400 mb-2">$whoami</p>
+              <h1 className="font-mono text-xl text-emerald-400 mb-4">{t('about.title')}</h1>
+              <p className="font-mono text-emerald-400 mb-2">{t('about.whoami')}</p>
               <p className="max-w-3xl text-emerald-100/90">
-                Freelance/full‑stack developer with experience delivering React/Next.js frontends, Python/FastAPI and Laravel backends, and integrating real‑time messaging. Built and integrated APIs, worked across time zones with international teams, and focused on clean, efficient code and reliable results.
+                {t('about.whoami.body')}
               </p>
             </div>
             <div className="justify-self-end">
@@ -50,68 +55,68 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-10">
-            <p className="font-mono text-emerald-400">$ cat /etc/specialties</p>
+            <p className="font-mono text-emerald-400">{t('about.specialties.cmd')}</p>
             <ul className="mt-3 list-disc pl-6 text-emerald-100/90 space-y-1">
-              <li>Full-Stack Web Development (React, Next.js, Python, Laravel/PHP)</li>
-              <li>REST API Development & Integration</li>
-              <li>Database Design & Optimization (MySQL, PostgreSQL, MongoDB)</li>
-              <li>CMS Development & Customization (Joomla)</li>
-              <li>Debugging, Code Optimization & Maintenance</li>
-              <li>Strong Problem-Solving & Result-Oriented Approach</li>
+              <li>{t('about.specialties.1')}</li>
+              <li>{t('about.specialties.2')}</li>
+              <li>{t('about.specialties.3')}</li>
+              <li>{t('about.specialties.4')}</li>
+              <li>{t('about.specialties.5')}</li>
+              <li>{t('about.specialties.6')}</li>
             </ul>
           </div>
 
           <div className="mt-10">
-            <p className="font-mono text-emerald-400">$ cat /etc/tech-stack</p>
+            <p className="font-mono text-emerald-400">{t('about.techStack.cmd')}</p>
             <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <div className="terminal-border rounded-md p-6 text-center">
                 <div className="text-3xl mb-3">🧩</div>
-                <h4 className="font-mono text-emerald-400">Frontend</h4>
+                <h4 className="font-mono text-emerald-400">{t('cards.frontend')}</h4>
                 <p className="mt-2 text-emerald-100/90">React, Next.js, Tailwind CSS, Three.js</p>
               </div>
               <div className="terminal-border rounded-md p-6 text-center">
                 <div className="text-3xl mb-3">⚙️</div>
-                <h4 className="font-mono text-emerald-400">Backend</h4>
+                <h4 className="font-mono text-emerald-400">{t('cards.backend')}</h4>
                 <p className="mt-2 text-emerald-100/90">Laravel (PHP), Node.js/Express, Python/FastAPI</p>
               </div>
               <div className="terminal-border rounded-md p-6 text-center">
                 <div className="text-3xl mb-3">🗄️</div>
-                <h4 className="font-mono text-emerald-400">Databases</h4>
+                <h4 className="font-mono text-emerald-400">{t('cards.databases')}</h4>
                 <p className="mt-2 text-emerald-100/90">MySQL, PostgreSQL, MongoDB, Redis, Firebase</p>
               </div>
               <div className="terminal-border rounded-md p-6 text-center">
                 <div className="text-3xl mb-3">☁️</div>
-                <h4 className="font-mono text-emerald-400">Tools & Cloud</h4>
+                <h4 className="font-mono text-emerald-400">{t('cards.tools')}</h4>
                 <p className="mt-2 text-emerald-100/90">Docker, Git & GitHub, Postman, AWS, Google Cloud, Vercel</p>
               </div>
             </div>
           </div>
 
           <div className="mt-10">
-            <p className="font-mono text-emerald-400">$ ls ~/education</p>
+            <p className="font-mono text-emerald-400">{t('about.education.cmd')}</p>
             <ul className="mt-3 space-y-2 text-emerald-100/90">
-              <li>Informatics and Management Systems — Georgian Technical University (2020–2024)</li>
-              <li>Self‑Taught Developer — courses and real‑world projects</li>
+              <li>{t('about.education.1')}</li>
+              <li>{t('about.education.2')}</li>
             </ul>
           </div>
 
           <div className="mt-10">
-            <p className="font-mono text-emerald-400">$ ls ~/skills</p>
+            <p className="font-mono text-emerald-400">{t('about.skills.cmd')}</p>
             <div className="mt-4 grid gap-4 md:grid-cols-3">
               <div className="terminal-border rounded-md p-4">
-                <h4 className="font-mono text-emerald-400 mb-3">Programming</h4>
+                <h4 className="font-mono text-emerald-400 mb-3">{t('about.skills.programming')}</h4>
                 <ul className="space-y-2 text-emerald-100/90">
                   <li>JavaScript, Python, PHP, Java</li>
                 </ul>
               </div>
               <div className="terminal-border rounded-md p-4">
-                <h4 className="font-mono text-emerald-400 mb-3">Testing & Realtime</h4>
+                <h4 className="font-mono text-emerald-400 mb-3">{t('about.skills.testing')}</h4>
                 <ul className="space-y-2 text-emerald-100/90">
                   <li>PyTest, Pusher, Socket.io</li>
                 </ul>
               </div>
               <div className="terminal-border rounded-md p-4">
-                <h4 className="font-mono text-emerald-400 mb-3">Version Control</h4>
+                <h4 className="font-mono text-emerald-400 mb-3">{t('about.skills.vc')}</h4>
                 <ul className="space-y-2 text-emerald-100/90">
                   <li>Git, GitHub</li>
                 </ul>
@@ -120,13 +125,13 @@ export default function AboutPage() {
           </div>
 
           <div className="mt-10">
-            <p className="font-mono text-emerald-400">$ ls ~/resume</p>
+            <p className="font-mono text-emerald-400">{t('about.resume.cmd')}</p>
             <div className="mt-3">
               <a
                 href="/resume.pdf"
                 className="terminal-border rounded-md px-5 py-3 inline-flex items-center font-mono text-sm bg-emerald-500 text-black hover:bg-emerald-400"
               >
-                Download Resume PDF
+                {t('about.resume.download')}
               </a>
             </div>
           </div>
