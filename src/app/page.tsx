@@ -19,7 +19,7 @@ export default function Home() {
           </a>
           <nav className="hidden md:flex items-center gap-6 font-mono text-sm">
             <a className="nav-link" href="/about">{t('nav.about')}</a>
-            <a className="nav-link" href="#projects">{t('nav.projects')}</a>
+            <a className="nav-link" href="/projects">{t('nav.projects')}</a>
             <a className="nav-link" href="#experience">{t('nav.experience')}</a>
             <a className="nav-link" href="#contact">{t('nav.contact')}</a>
             <div className="flex items-center gap-2">
