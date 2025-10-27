@@ -163,6 +163,10 @@ const translations: Translations = {
   'experience.cv.download': { ka: 'CV-ის ჩამოტვირთვა', en: 'Download CV' },
   'experience.cv.georgian': { ka: 'ქართული CV', en: 'Georgian CV' },
   'experience.cv.english': { ka: 'ინგლისური CV', en: 'English CV' },
+
+  // Social Links
+  'footer.github': { ka: 'GitHub', en: 'GitHub' },
+  'footer.linkedin': { ka: 'LinkedIn', en: 'LinkedIn' },
 };
 
 type I18nContextType = {
