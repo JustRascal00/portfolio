@@ -21,7 +21,7 @@ export default function Home() {
             <a className="nav-link" href="/about">{t('nav.about')}</a>
             <a className="nav-link" href="/projects">{t('nav.projects')}</a>
             <a className="nav-link" href="/experience">{t('nav.experience')}</a>
-            <a className="nav-link" href="#contact">{t('nav.contact')}</a>
+            <a className="nav-link" href="/contact">{t('nav.contact')}</a>
             <div className="flex items-center gap-2">
               <span className="availability-dot" />
               <span className="text-emerald-300">{t('nav.available')}</span>
