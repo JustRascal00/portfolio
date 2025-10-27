@@ -157,7 +157,7 @@ export default function Home() {
               </svg>
             </a>
             <a
-              href="https://linkedin.com/in/mamuka-khokerashvili"
+              href="https://www.linkedin.com/in/mamuka-khokerashvili-538893277"
               target="_blank"
               rel="noopener noreferrer"
               className="text-emerald-400 hover:text-emerald-300 transition-colors"
