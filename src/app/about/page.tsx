@@ -17,7 +17,7 @@ export default function AboutPage() {
           <nav className="hidden md:flex items-center gap-6 font-mono text-sm">
             <a className="nav-link" href="/about">{t('nav.about')}</a>
             <a className="nav-link" href="/projects">{t('nav.projects')}</a>
-            <a className="nav-link" href="/#experience">{t('nav.experience')}</a>
+            <a className="nav-link" href="/experience">{t('nav.experience')}</a>
             <a className="nav-link" href="/#contact">{t('nav.contact')}</a>
             <div className="flex items-center gap-2">
               <span className="availability-dot" />
@@ -126,12 +126,22 @@ export default function AboutPage() {
 
           <div className="mt-10">
             <p className="font-mono text-emerald-400">{t('about.resume.cmd')}</p>
-            <div className="mt-3">
+            <div className="mt-3 flex flex-wrap gap-4">
               <a
-                href="/resume.pdf"
+                href="/CV/Cv.pdf"
+                download="Mamuka_Khokerashvili_CV_Georgian.pdf"
                 className="terminal-border rounded-md px-5 py-3 inline-flex items-center font-mono text-sm bg-emerald-500 text-black hover:bg-emerald-400"
               >
-                {t('about.resume.download')}
+                <span className="mr-2">📄</span>
+                {t('experience.cv.georgian')}
+              </a>
+              <a
+                href="/CV/CvEng.pdf"
+                download="Mamuka_Khokerashvili_CV_English.pdf"
+                className="terminal-border rounded-md px-5 py-3 inline-flex items-center font-mono text-sm bg-emerald-500 text-black hover:bg-emerald-400"
+              >
+                <span className="mr-2">📄</span>
+                {t('experience.cv.english')}
               </a>
             </div>
           </div>

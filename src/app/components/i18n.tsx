@@ -118,6 +118,51 @@ const translations: Translations = {
   'about.skills.programming': { ka: 'პროგრამირება', en: 'Programming' },
   'about.skills.testing': { ka: 'ტესტირება და რეალთაიმი', en: 'Testing & Realtime' },
   'about.skills.vc': { ka: 'ვერსიის კონტროლი', en: 'Version Control' },
+
+  // Experience page
+  'experience.title': { ka: 'სამუშაო გამოცდილება', en: 'Work Experience' },
+  'experience.subtitle': { ka: 'ბოლო როლები და შერჩეული მიღწევები.', en: 'Recent roles and selected achievements.' },
+  'experience.technicalExpertise.title': { ka: 'ტექნიკური ექსპერტიზა', en: 'Technical Expertise' },
+  'experience.technicalExpertise.frontend': { ka: 'ფრონტენდ ტექნოლოგიები', en: 'Frontend Technologies' },
+  'experience.technicalExpertise.backend': { ka: 'ბექენდ ტექნოლოგიები', en: 'Backend Technologies' },
+
+  // Experience entries
+  'experience.freelance.title': { ka: 'ფრილანს დეველოპერი', en: 'Freelance Developer' },
+  'experience.freelance.company': { ka: 'Upwork/Freelancer.com', en: 'Upwork/Freelancer.com' },
+  'experience.freelance.location': { ka: 'დისტანციურად', en: 'Remote' },
+  'experience.freelance.period': { ka: '2022 | 2023', en: '2022 | 2023' },
+  'experience.freelance.achievement1': { ka: 'შევქმენი სრულფასოვანი ვებ პროექტები React-ის, Next.js-ის, Python-ის და Laravel-ის გამოყენებით, კლიენტებისათვის', en: 'Developed full-stack solutions using React, Next.js, Python and Laravel(PHP)' },
+  'experience.freelance.achievement2': { ka: 'დავაპროგრამე და დავინტეგრე API-ები Python-ისა და PHP-ის გამოყენებით ', en: 'Built and integrated APIs using Python and PHP, ensuring secure and efficient data exchange' },
+  'experience.freelance.achievement3': { ka: 'წარმატებით შევასრულე და კლიენტთა კმაყოფილებით მივაწოდე პროექტები', en: 'Delivered projects on time with consistent client satisfaction' },
+  'experience.freelance.achievement4': { ka: 'ვითანამშრომლე საერთაშორისო კლიენტებთან სხვადასხვა დროის ზონაში', en: 'Collaborated with international clients across multiple time zones' },
+
+  'experience.backend.title': { ka: 'ბექენდ დეველოპერი', en: 'Backend Developer' },
+  'experience.backend.company': { ka: 'Money4you.financial', en: 'Money4you.financial' },
+  'experience.backend.location': { ka: 'საქართველო, თბილისი', en: 'Georgia, Tbilisi' },
+  'experience.backend.period': { ka: '2023 | 2024', en: '2023 | 2024' },
+  'experience.backend.achievement1': { ka: 'ვმართავდი პროექტებს და უზრუნველვყოფდი მათ წარმატებულ შესრულებას Laravel-ის გამოყენებით', en: 'Successful project management using Laravel methodologies' },
+  'experience.backend.achievement2': { ka: 'SQL და MySQL მონაცემთა ბაზებთან მუშაობა', en: 'Strong experience with SQL and MySQL databases' },
+  'experience.backend.achievement3': { ka: 'ვზრუნავდი პროგრამული უზრუნველყოფის სრული ფუნქციონირების უზრუნველყოფაზე   ', en: 'Full functionality of the software to make it comprehensive development' },
+  'experience.backend.achievement4': { ka: 'შედეგზე ორიენტირებული მიდგომა მუშაობაში', en: 'A result-oriented approach to work' },
+  'experience.backend.achievement5': { ka: 'API-ების აშენებისა და ინტეგრაციის გამოცდილება', en: 'Experience building and integrating APIs' },
+  'experience.backend.achievement6': { ka: 'გუნდურ მუშაობის უნარი', en: 'Ability to work as a team' },
+  'experience.backend.achievement8': { ka: 'არსებული კოდის ბაზების დებაგინგის, ოპტიმიზაციისა და მოვლის უნარი', en: 'Skilled in debugging, optimizing, and maintaining existing codebases' },
+  'experience.backend.achievement9': { ka: 'მაღალი კოდის ხარისხისა და ეფექტურობის სტანდარტების შენარჩუნებით შედეგების მიღწევაზე ფოკუსირება', en: 'Focused on achieving results while maintaining high standards of code quality and efficiency' },
+  'experience.backend.achievement10': { ka: 'Laravel-თან მუშაობის პარალელურად, ვმართავდი Joomla-ზე დაფუძნებულ CMS-ს. აპლიკაცია შეიქმნა ორივე ჩარჩოს გამოყენებით,რისგამოც Laravel-ის ფუნქციონალი სრულად უნდა ყოფილიყო თავსებადი Joomla-ს სტრუქტურასთან და მონაცემთა მოდელებთან', en: 'While working with Laravel, I also managed and extended a Joomla-based CMS. The application was built using both frameworks, so all Laravel features had to be fully compatible with Joomla\'s structure and data models' },
+
+  'experience.database.title': { ka: 'მონაცემთა ბაზის ოპერატორი', en: 'Database Operator' },
+  'experience.database.company': { ka: 'IT Service Georgia', en: 'IT Service Georgia' },
+  'experience.database.location': { ka: 'საქართველო, თბილისი', en: 'Georgia, Tbilisi' },
+  'experience.database.period': { ka: '2024/დღემდე', en: '2024/Present' },
+  'experience.database.achievement1': { ka: 'ვაფიქსირებ მონაცემებს ბაზაში სწორად და ზუსტად ', en: 'Correctly recording data in the database' },
+  'experience.database.achievement2': { ka: 'მომხმარებლებს ვაწვდი ინფორმაციას მომსახურებებსა და პროდუქტებზე', en: 'Providing information to customers about services/products' },
+  'experience.database.achievement3': { ka: 'განაცხადებისა და შეკვეთების მიღება/ჩაწერა', en: 'Receiving/recording applications and orders' },
+  'experience.database.achievement4': { ka: 'პრობლემების აღმოჩენის შემთხვევაში ვწყვეტ და ვგზავნი შესაბამის დეპარტამენტთან', en: 'Solving problems and forwarding them to the appropriate department' },
+
+  // CV Download
+  'experience.cv.download': { ka: 'CV-ის ჩამოტვირთვა', en: 'Download CV' },
+  'experience.cv.georgian': { ka: 'ქართული CV', en: 'Georgian CV' },
+  'experience.cv.english': { ka: 'ინგლისური CV', en: 'English CV' },
 };
 
 type I18nContextType = {
