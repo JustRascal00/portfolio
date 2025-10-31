@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import Image from "next/image";
 
 type HologramPortraitProps = {
   src: string;
@@ -200,7 +199,7 @@ export default function HologramPortrait({
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(rafId);
     };
-  }, [sampleSize, neonIntensity]);
+  }, [sampleSize, neonIntensity, cycleMs, mode, noiseAmount, overlays]);
 
   return (
     <div className={["relative", className].filter(Boolean).join(" ")}>

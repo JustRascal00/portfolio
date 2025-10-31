@@ -167,6 +167,30 @@ const translations: Translations = {
   // Social Links
   'footer.github': { ka: 'GitHub', en: 'GitHub' },
   'footer.linkedin': { ka: 'LinkedIn', en: 'LinkedIn' },
+
+  // Contact page
+  'contact.title': { ka: 'კონტაქტის ინფორმაცია', en: 'Contact Information' },
+  'contact.description': {
+    ka: 'მოგსურთ თქვენი ვებ აპლიკაცია შევქმნა ან ციფრული პროდუქტი გაიზარდოს? დავეხმარები სტარტაპებსა და გუნდებს იდეების წარმოადგენაში წარმოებისთვის მზად გადაწყვეტილებებად. ფულ-სტექ აპლიკაციებიდან AI-ით გაძლიერებულ ინსტრუმენტებამდე, მოვაქვს ღრმა ექსპერტიზა და მშენებლის მენტალიტეტი ყველა კოლაბორაციაში.',
+    en: 'Looking to bring your web application to life or scale your digital product? I help startups and teams turn ideas into production-ready solutions. From full-stack applications to AI-powered tools, I bring deep expertise and a builder&apos;s mindset to every collaboration.'
+  },
+  'contact.directContact': { ka: 'პირდაპირი კონტაქტი', en: 'Direct Contact' },
+  'contact.email': { ka: 'ელფოსტა', en: 'email' },
+  'contact.phone': { ka: 'ტელეფონი', en: 'phone' },
+  'contact.socialLinks': { ka: 'სოციალური ბმულები', en: 'Social Links' },
+  'contact.github': { ka: 'GitHub', en: 'github' },
+  'contact.linkedin': { ka: 'LinkedIn', en: 'linkedin' },
+  'contact.form.title': { ka: 'მოგვწერე!', en: 'Say hello!' },
+  'contact.form.name': { ka: 'სახელი', en: 'Name' },
+  'contact.form.namePlaceholder': { ka: 'თქვენი სახელი', en: 'Your Name' },
+  'contact.form.email': { ka: 'ელფოსტა', en: 'Email' },
+  'contact.form.emailPlaceholder': { ka: 'your@email.com', en: 'your@email.com' },
+  'contact.form.message': { ka: 'მესიჯი', en: 'Message' },
+  'contact.form.messagePlaceholder': { ka: 'შეიყვანეთ თქვენი მესიჯი აქ...', en: 'Enter your message here...' },
+  'contact.form.sending': { ka: 'გაგზავნა...', en: 'Sending...' },
+  'contact.form.submit': { ka: 'გაგზავნა', en: 'Submit' },
+  'contact.form.success': { ka: '✓ მესიჯი წარმატებით გაიგზავნა! მალე დაგიკავშირდები.', en: '✓ Message sent successfully! I&apos;ll get back to you soon.' },
+  'contact.form.error': { ka: '✗ მესიჯის გაგზავნა ვერ მოხერხდა. გთხოვთ სცადოთ თავიდან ან მიწეროთ პირდაპირ.', en: '✗ Failed to send message. Please try again or email me directly.' },
 };
 
 type I18nContextType = {
