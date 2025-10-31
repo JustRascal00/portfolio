@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 import LanguageToggle from "../components/LanguageToggle";
 import { useI18n } from "../components/i18n";
 
@@ -56,11 +57,11 @@ export default function Experience() {
     <div className="scanlines crt-sweep min-h-screen w-full">
       <header className="sticky top-0 z-40 backdrop-blur-sm bg-black/30">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3 font-mono" aria-label="Go to home">
+          <Link href="/" className="flex items-center gap-3 font-mono" aria-label="Go to home">
             <span className="neon-text">&gt;_</span>
             <span className="text-emerald-400">mamuka@portfolio</span>
             <span className="text-emerald-700">:~$</span>
-          </a>
+          </Link>
           <nav className="hidden md:flex items-center gap-6 font-mono text-sm">
             <a className="nav-link" href="/about">{t('nav.about')}</a>
             <a className="nav-link" href="/projects">{t('nav.projects')}</a>

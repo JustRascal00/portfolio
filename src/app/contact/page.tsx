@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 import LanguageToggle from "../components/LanguageToggle";
 import { useI18n } from "../components/i18n";
 import { useState } from "react";
@@ -55,11 +56,11 @@ export default function Contact() {
     <div className="scanlines crt-sweep min-h-screen w-full">
       <header className="sticky top-0 z-40 backdrop-blur-sm bg-black/30">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3 font-mono" aria-label="Go to home">
+          <Link href="/" className="flex items-center gap-3 font-mono" aria-label="Go to home">
             <span className="neon-text">&gt;_</span>
             <span className="text-emerald-400">mamuka@portfolio</span>
             <span className="text-emerald-700">:~$</span>
-          </a>
+          </Link>
           <nav className="hidden md:flex items-center gap-6 font-mono text-sm">
             <a className="nav-link" href="/about">{t('nav.about')}</a>
             <a className="nav-link" href="/projects">{t('nav.projects')}</a>
@@ -90,7 +91,7 @@ export default function Contact() {
                 <span className="animate-pulse">|</span>
               </h1>
               <p className="text-emerald-100/90 leading-relaxed font-mono text-sm">
-                Looking to bring your web application to life or scale your digital product? I help startups and teams turn ideas into production-ready solutions. From full-stack applications to AI-powered tools, I bring deep expertise and a builder's mindset to every collaboration.
+                Looking to bring your web application to life or scale your digital product? I help startups and teams turn ideas into production-ready solutions. From full-stack applications to AI-powered tools, I bring deep expertise and a builder&apos;s mindset to every collaboration.
               </p>
             </div>
 
@@ -185,7 +186,7 @@ export default function Contact() {
               
               {submitStatus === 'success' && (
                 <div className="text-emerald-400 font-mono text-sm text-center">
-                  ✓ Message sent successfully! I'll get back to you soon.
+                  ✓ Message sent successfully! I&apos;ll get back to you soon.
                 </div>
               )}
               

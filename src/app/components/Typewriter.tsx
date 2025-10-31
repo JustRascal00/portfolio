@@ -37,8 +37,6 @@ export default function Typewriter(props: TypewriterProps) {
   const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    let timeoutId: number | undefined;
-
     // Support reduced motion preference: render immediately.
     if (typeof window !== "undefined" &&
         window.matchMedia &&
@@ -49,7 +47,7 @@ export default function Typewriter(props: TypewriterProps) {
 
     const delay = index === 0 && !deleting ? startDelayMs : Math.max(16, 1000 / speedCps);
 
-    timeoutId = window.setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       if (!loop) {
         setIndex((prev) => Math.min(prev + 1, characters.length));
         return;

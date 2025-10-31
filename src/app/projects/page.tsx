@@ -1,110 +1,37 @@
 'use client';
+import Image from "next/image";
+import Link from "next/link";
 import LanguageToggle from "../components/LanguageToggle";
 import { useI18n } from "../components/i18n";
+import { PROJECTS_DATA } from "../data/projects";
+
+type TranslationKey = string;
 
 export default function Projects() {
   const { t } = useI18n();
   
-  const projects = [
-    {
-      id: 'chatapp',
-      title: t('projects.chatApp1.title'),
-      category: t('projects.tags.chat'),
-      description: t('projects.chatApp1.description'),
-      techStack: ['Next.js', 'TypeScript', 'Prisma', 'Pusher'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/JustRascal00/chatapp',
-      image: '/projects/Website1.png',
-      isNew: false
-    },
-    {
-      id: 'chatroom',
-      title: t('projects.chatRoom.title'),
-      category: t('projects.tags.chat'),
-      description: t('projects.chatRoom.description'),
-      techStack: ['PHP', 'SQL', 'JavaScript', 'CSS'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/JustRascal00/chatroom',
-      image: '/projects/Website2.png',
-      isNew: false
-    },
-    {
-      id: 'rasapp',
-      title: t('projects.whatsappClone.title'),
-      category: t('projects.tags.chat'),
-      description: t('projects.whatsappClone.description'),
-      techStack: ['Next.js', 'Socket.io', 'Tailwind CSS', 'Node.js', 'Firebase'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/JustRascal00/rasapp',
-      image: '/projects/Website3.png',
-      isNew: false
-    },
-    {
-      id: 'laravel-project-management',
-      title: t('projects.projectManagement.title'),
-      category: t('projects.tags.management'),
-      description: t('projects.projectManagement.description'),
-      techStack: ['Laravel', 'React', 'Inertia.js'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/JustRascal00/laravel-ProjectManagement-App',
-      image: '/projects/Website4.png',
-      isNew: false
-    },
-    {
-      id: 'chatai',
-      title: t('projects.title'),
-      category: t('projects.tags.ai'),
-      description: t('projects.summary'),
-      techStack: ['React', 'Express', 'MongoDB', 'Google Gemini AI'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/JustRascal00/CHATAI',
-      image: '/projects/Website5.png',
-      isNew: true
-    },
-    {
-      id: 'cv-website',
-      title: t('projects.portfolio3d.title'),
-      category: t('projects.tags.portfolio'),
-      description: t('projects.portfolio3d.description'),
-      techStack: ['Three.js', 'React Three Fiber', 'Tailwind CSS', 'Framer Motion'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/JustRascal00/Cv-Website',
-      image: '/projects/Website6.png',
-      isNew: true
-    },
-    {
-      id: 'webexplain',
-      title: t('projects.webExplain.title'),
-      category: t('projects.tags.ai'),
-      description: t('projects.webExplain.description'),
-      techStack: ['Next.js', 'TypeScript', 'Redis/Upstash', 'NextUI', 'Tailwind CSS', 'LlamaIndex/RAG', 'Lucide Icons'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/JustRascal00/webexplain',
-      image: '/projects/Website7.png',
-      isNew: true
-    },
-    {
-      id: 'emotion-detection',
-      title: t('projects.emotionDetection.title'),
-      category: t('projects.tags.ai'),
-      description: t('projects.emotionDetection.description'),
-      techStack: ['React.js', 'Next.js', 'FastAPI', 'Python', 'DeepFace', 'YouTube API'],
-      liveUrl: '#',
-      githubUrl: 'https://github.com/JustRascal00/emotion-detection-ai',
-      image: '/projects/Website8.png',
-      isNew: true
-    }
-  ];
+  // Transform the data to include translated values
+  const projects = PROJECTS_DATA.map(project => ({
+    id: project.id,
+    title: t(project.titleKey as TranslationKey),
+    category: t(project.categoryKey as TranslationKey),
+    description: t(project.descriptionKey as TranslationKey),
+    techStack: project.techStack,
+    liveUrl: project.liveUrl,
+    githubUrl: project.githubUrl,
+    image: project.image,
+    isNew: project.isNew
+  }));
 
   return (
     <div className="scanlines crt-sweep min-h-screen w-full">
       <header className="sticky top-0 z-40 backdrop-blur-sm bg-black/30">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3 font-mono" aria-label="Go to home">
+          <Link href="/" className="flex items-center gap-3 font-mono" aria-label="Go to home">
             <span className="neon-text">&gt;_</span>
             <span className="text-emerald-400">mamuka@portfolio</span>
             <span className="text-emerald-700">:~$</span>
-          </a>
+          </Link>
           <nav className="hidden md:flex items-center gap-6 font-mono text-sm">
             <a className="nav-link" href="/about">{t('nav.about')}</a>
             <a className="nav-link bg-emerald-500 text-black px-3 py-1 rounded" href="/projects">{t('nav.projects')}</a>
@@ -143,9 +70,11 @@ export default function Projects() {
             <div key={project.id} className="terminal-border rounded-lg p-8 bg-black/20 hover:bg-black/30 transition-colors">
               {/* Project image */}
               <div className="w-full h-64 rounded-lg mb-6 overflow-hidden border border-emerald-700/30">
-                <img 
+                <Image 
                   src={project.image} 
                   alt={project.title}
+                  width={800}
+                  height={400}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
               </div>

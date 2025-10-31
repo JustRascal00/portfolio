@@ -1,22 +1,45 @@
 'use client';
-import Typewriter from "./components/Typewriter";
+import { useState, useEffect } from 'react';
+import Link from "next/link";
 import Image from "next/image";
+import Typewriter from "./components/Typewriter";
 import HologramPortrait from "./components/HologramPortrait";
 import PixelText from "./components/PixelText";
 import LanguageToggle from "./components/LanguageToggle";
 import { useI18n } from "./components/i18n";
+import { PROJECTS_DATA, FEATURED_PROJECT_ID } from "./data/projects";
+
+type TranslationKey = string;
 
 export default function Home() {
   const { t } = useI18n();
+  const [featuredProject, setFeaturedProject] = useState(
+    PROJECTS_DATA.find(p => p.id === FEATURED_PROJECT_ID)
+  );
+  
+  // Fetch featured project from API
+  useEffect(() => {
+    fetch('/api/admin/featured')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.featuredProject) {
+          setFeaturedProject(data.featuredProject);
+        }
+      })
+      .catch(() => {
+        // Fallback to default if API fails
+        setFeaturedProject(PROJECTS_DATA.find(p => p.id === FEATURED_PROJECT_ID));
+      });
+  }, []);
   return (
     <div className="scanlines crt-sweep min-h-screen w-full">
       <header className="sticky top-0 z-40 backdrop-blur-sm bg-black/30">
         <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-          <a href="/" className="flex items-center gap-3 font-mono" aria-label="Go to home">
+          <Link href="/" className="flex items-center gap-3 font-mono" aria-label="Go to home">
             <span className="neon-text">&gt;_</span>
             <span className="text-emerald-400">mamuka@portfolio</span>
             <span className="text-emerald-700">:~$</span>
-          </a>
+          </Link>
           <nav className="hidden md:flex items-center gap-6 font-mono text-sm">
             <a className="nav-link" href="/about">{t('nav.about')}</a>
             <a className="nav-link" href="/projects">{t('nav.projects')}</a>
@@ -104,34 +127,66 @@ export default function Home() {
         <section id="projects" className="mt-16">
           <div className="terminal-border rounded-md p-6 md:p-8">
             <p className="font-mono text-emerald-400 mb-3">{t('projects.featured')}</p>
-            <h3 className="text-2xl md:text-3xl font-mono neon-text">{t('projects.title')}</h3>
-            <div className="mt-3 flex gap-2 font-mono text-xs flex-wrap">
-              {[
-                t('projects.tags.ai'),
-                t('projects.tags.realtime'),
-                t('projects.tags.chat'),
-                t('projects.tags.fullstack'),
-              ].map((tag) => (
-                <span key={tag} className="terminal-border rounded px-2 py-1 text-emerald-300">{tag}</span>
-              ))}
+            
+            <div className="flex gap-6 items-start">
+              {featuredProject && featuredProject.image && (
+                <div className="hidden md:block flex-shrink-0 w-32 h-32 rounded-lg overflow-hidden border border-emerald-700/30">
+                  <Image 
+                    src={featuredProject.image} 
+                    alt={t(featuredProject.titleKey as TranslationKey)}
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+              )}
+              
+              <div className="flex-1">
+                <h3 className="text-2xl md:text-3xl font-mono neon-text">{featuredProject ? t(featuredProject.titleKey as TranslationKey) : t('projects.title')}</h3>
+                {featuredProject && featuredProject.tags && (
+                  <div className="mt-3 flex gap-2 font-mono text-xs flex-wrap">
+                    {featuredProject.tags.map((tagKey) => (
+                      <span key={tagKey} className="terminal-border rounded px-2 py-1 text-emerald-300">{t(tagKey as TranslationKey)}</span>
+                    ))}
+                  </div>
+                )}
+                <p className="mt-4 max-w-3xl text-emerald-100/90">
+                  {featuredProject ? t(featuredProject.descriptionKey as TranslationKey) : t('projects.summary')}
+                </p>
+                
+                {featuredProject && featuredProject.techStack && featuredProject.techStack.length > 0 && (
+                  <div className="mt-4">
+                    <p className="font-mono text-emerald-400 mb-2 text-sm">{t('projects.techStack')}:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {featuredProject.techStack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="terminal-border rounded px-3 py-1 text-sm font-mono text-emerald-300"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
-            <p className="mt-4 max-w-3xl text-emerald-100/90">
-              {t('projects.summary')}
-            </p>
-            <ul className="mt-4 list-disc pl-5 text-emerald-100/90">
-              <li>{t('projects.bullet.ai')}</li>
-              <li>{t('projects.bullet.realtime')}</li>
-              <li>{t('projects.bullet.responsive')}</li>
-            </ul>
+            {featuredProject && featuredProject.bulletPoints && (
+              <ul className="mt-4 list-disc pl-5 text-emerald-100/90">
+                {featuredProject.bulletPoints.map((bulletKey) => (
+                  <li key={bulletKey}>{t(bulletKey as TranslationKey)}</li>
+                ))}
+              </ul>
+            )}
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="#"
+                href={featuredProject?.liveUrl || '#'}
                 className="terminal-border rounded-md px-5 py-3 font-mono text-sm bg-emerald-500 text-black hover:bg-emerald-400"
               >
                 {t('projects.cta.live')}
               </a>
               <a
-                href="https://github.com/JustRascal00/CHATAI"
+                href={featuredProject?.githubUrl || 'https://github.com/JustRascal00/CHATAI'}
                 className="terminal-border rounded-md px-5 py-3 font-mono text-sm hover:bg-emerald-500/10"
               >
                 {t('projects.cta.code')}
