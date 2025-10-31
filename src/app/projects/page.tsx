@@ -1,6 +1,7 @@
 'use client';
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
 import LanguageToggle from "../components/LanguageToggle";
 import { useI18n } from "../components/i18n";
 import { PROJECTS_DATA } from "../data/projects";
@@ -22,6 +23,141 @@ export default function Projects() {
     image: project.image,
     isNew: project.isNew
   }));
+
+  // Auto-detect uptime: derive initial badge by presence of a real liveUrl, then verify
+  const initialStatuses = useMemo(() => {
+    return projects.reduce<Record<string, 'loading' | 'live' | 'demo'>>((acc, p) => {
+      if (!p.liveUrl || p.liveUrl === '#') {
+        acc[p.id] = 'demo';
+      } else {
+        acc[p.id] = 'loading';
+      }
+      return acc;
+    }, {});
+  }, [projects]);
+
+  const [statusById, setStatusById] = useState<Record<string, 'loading' | 'live' | 'demo'>>(initialStatuses);
+  const [latencyById, setLatencyById] = useState<Record<string, number>>({});
+  const [checkedAtById, setCheckedAtById] = useState<Record<string, number>>({});
+  const statusCacheKey = 'projectStatusCache:v1';
+  const hasHydratedRef = useRef(false);
+  const gridRef = useRef<HTMLDivElement | null>(null);
+
+  // Filter/Search/Sort state
+  const [statusFilter, setStatusFilter] = useState<'all' | 'live' | 'demo'>('all');
+  const [techFilter, setTechFilter] = useState<string | 'all'>('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [sortBy, setSortBy] = useState<'new' | 'live' | 'az'>('new');
+
+  const allTechs = useMemo(() => {
+    const s = new Set<string>();
+    projects.forEach(p => p.techStack.forEach(t => s.add(t)));
+    return Array.from(s).sort((a,b)=>a.localeCompare(b));
+  }, [projects]);
+
+  const filteredProjects = useMemo(() => {
+    let list = [...projects];
+    if (statusFilter !== 'all') {
+      list = list.filter(p => statusById[p.id] === statusFilter);
+    }
+    if (techFilter !== 'all') {
+      list = list.filter(p => p.techStack.includes(techFilter));
+    }
+    if (searchTerm.trim()) {
+      const q = searchTerm.toLowerCase();
+      list = list.filter(p =>
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+      );
+    }
+    if (sortBy === 'new') {
+      list.sort((a,b) => Number(b.isNew) - Number(a.isNew));
+    } else if (sortBy === 'live') {
+      list.sort((a,b) => {
+        const sa = statusById[a.id] === 'live' ? 1 : 0;
+        const sb = statusById[b.id] === 'live' ? 1 : 0;
+        return sb - sa;
+      });
+    } else if (sortBy === 'az') {
+      list.sort((a,b) => a.title.localeCompare(b.title));
+    }
+    return list;
+  }, [projects, statusById, statusFilter, techFilter, searchTerm, sortBy]);
+
+  useEffect(() => {
+    let isCancelled = false;
+    // hydrate from cache once on mount
+    if (!hasHydratedRef.current && typeof window !== 'undefined') {
+      hasHydratedRef.current = true;
+      try {
+        const raw = localStorage.getItem(statusCacheKey);
+        if (raw) {
+          const parsed = JSON.parse(raw) as {
+            statusById: Record<string, 'live' | 'demo'>,
+            latencyById: Record<string, number>,
+            checkedAtById: Record<string, number>
+          };
+          setStatusById(prev => ({ ...prev, ...parsed.statusById }));
+          setLatencyById(parsed.latencyById || {});
+          setCheckedAtById(parsed.checkedAtById || {});
+        }
+      } catch { /* ignore bad cache */ }
+    }
+
+    projects.forEach((p) => {
+      if (!p.liveUrl || p.liveUrl === '#') return;
+
+      // Try a quick HEAD request; fall back to considering it live on opaque success
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 4000);
+      const start = performance.now();
+
+      fetch(p.liveUrl, { method: 'HEAD', mode: 'no-cors', cache: 'no-store', signal: controller.signal })
+        .then(() => {
+          if (isCancelled) return;
+          setStatusById(prev => ({ ...prev, [p.id]: 'live' }));
+          const ms = Math.round(performance.now() - start);
+          setLatencyById(prev => ({ ...prev, [p.id]: ms }));
+          setCheckedAtById(prev => ({ ...prev, [p.id]: Date.now() }));
+        })
+        .catch(() => {
+          if (isCancelled) return;
+          setStatusById(prev => ({ ...prev, [p.id]: 'demo' }));
+          setCheckedAtById(prev => ({ ...prev, [p.id]: Date.now() }));
+        })
+        .finally(() => clearTimeout(timeout));
+    });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [projects]);
+
+  // persist cache when values change
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const payload = JSON.stringify({ statusById, latencyById, checkedAtById });
+      localStorage.setItem(statusCacheKey, payload);
+    } catch { /* ignore quota */ }
+  }, [statusById, latencyById, checkedAtById]);
+
+  // reveal-on-scroll
+  useEffect(() => {
+    if (!gridRef.current) return;
+    const nodes = Array.from(gridRef.current.querySelectorAll('[data-reveal]')) as HTMLElement[];
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          (e.target as HTMLElement).classList.add('opacity-100','translate-y-0');
+          (e.target as HTMLElement).classList.remove('opacity-0','translate-y-4');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    nodes.forEach(n => io.observe(n));
+    return () => io.disconnect();
+  }, [filteredProjects]);
 
   return (
     <div className="scanlines crt-sweep min-h-screen w-full">
@@ -64,10 +200,56 @@ export default function Projects() {
           </p>
         </div>
 
+        {/* Controls */}
+        <div className="mb-6 flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
+          <div className="flex flex-wrap items-center gap-3">
+            <button onClick={()=>setStatusFilter('all')} className={`terminal-border rounded px-3 py-1 text-sm font-mono ${statusFilter==='all'?'bg-emerald-500/10 text-emerald-300':'text-emerald-300'}`}>All</button>
+            <button onClick={()=>setStatusFilter('live')} className={`terminal-border rounded px-3 py-1 text-sm font-mono ${statusFilter==='live'?'bg-emerald-500/10 text-emerald-300':'text-emerald-300'}`}>Live</button>
+            <button onClick={()=>setStatusFilter('demo')} className={`terminal-border rounded px-3 py-1 text-sm font-mono ${statusFilter==='demo'?'bg-emerald-500/10 text-emerald-300':'text-emerald-300'}`}>Demo</button>
+            <span className="mx-2 h-5 w-px bg-emerald-700/40" />
+            <select value={techFilter} onChange={(e)=>setTechFilter(e.target.value as any)} className="terminal-border bg-black/30 text-emerald-200 text-sm font-mono rounded px-2 py-1">
+              <option value="all">All Tech</option>
+              {allTechs.map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
+            <span className="mx-2 h-5 w-px bg-emerald-700/40" />
+            <select value={sortBy} onChange={(e)=>setSortBy(e.target.value as any)} className="terminal-border bg-black/30 text-emerald-200 text-sm font-mono rounded px-2 py-1">
+              <option value="new">New first</option>
+              <option value="live">Live first</option>
+              <option value="az">A–Z</option>
+            </select>
+          </div>
+          <input value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} placeholder="Search projects..." className="terminal-border bg-black/30 text-emerald-200 text-sm font-mono rounded px-3 py-2 w-full md:w-64" />
+        </div>
+
+        {/* Live region for status updates */}
+        <div className="sr-only" aria-live="polite">
+          {projects.map(p => (
+            <span key={p.id}>{p.title}: {statusById[p.id]}</span>
+          ))}
+        </div>
+
         {/* Projects grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8">
-          {projects.map((project) => (
-            <div key={project.id} className="terminal-border rounded-lg p-8 bg-black/20 hover:bg-black/30 transition-colors">
+        <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-8">
+          {filteredProjects.map((project) => (
+            <div
+              key={project.id}
+              data-reveal
+              className="terminal-border rounded-lg p-8 bg-black/20 hover:bg-black/30 transition-colors transform-gpu opacity-0 translate-y-4"
+              onMouseMove={(e) => {
+                const card = e.currentTarget as HTMLDivElement;
+                const rect = card.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width;
+                const py = (e.clientY - rect.top) / rect.height;
+                const rx = (py - 0.5) * -6;
+                const ry = (px - 0.5) * 6;
+                card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+              }}
+              onMouseLeave={(e) => {
+                const card = e.currentTarget as HTMLDivElement;
+                card.style.transform = '';
+              }}
+              style={{ boxShadow: statusById[project.id] === 'live' ? '0 0 40px rgba(16,185,129,0.15)' : undefined }}
+            >
               {/* Project image */}
               <div className="w-full h-64 rounded-lg mb-6 overflow-hidden border border-emerald-700/30">
                 <Image 
@@ -83,6 +265,44 @@ export default function Projects() {
               <div className="mb-6">
                 <div className="flex items-center gap-3 mb-3">
                   <h3 className="text-2xl font-mono font-bold text-emerald-400 flex-1">{project.title}</h3>
+                  {statusById[project.id] === 'loading' && (
+                    <span
+                      className="relative inline-flex items-center gap-2 text-sm px-3 py-1 rounded-full font-mono bg-emerald-500/10 text-emerald-300 border border-emerald-700/40"
+                      title="Checking availability..."
+                    >
+                      <svg className="animate-spin h-4 w-4 text-emerald-400" viewBox="0 0 24 24" fill="none">
+                        <circle className="opacity-20" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                        <path className="opacity-90" d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+                      </svg>
+                      Checking
+                    </span>
+                  )}
+                  {statusById[project.id] === 'live' && (
+                    <span
+                      className="relative inline-flex items-center gap-2 text-sm px-3 py-1 rounded-full font-mono bg-gradient-to-r from-emerald-400 to-emerald-500 text-black shadow-[0_0_20px_rgba(16,185,129,0.35)]"
+                      aria-label="Live site"
+                      title={`Live • ${latencyById[project.id] ? `${latencyById[project.id]} ms` : ''}${checkedAtById[project.id] ? ` • checked ${new Date(checkedAtById[project.id]).toLocaleTimeString()}` : ''}`}
+                    >
+                      <span className="relative flex h-2.5 w-2.5">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-black/30 opacity-60" />
+                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-black/70" />
+                      </span>
+                      Live
+                    </span>
+                  )}
+                  {statusById[project.id] === 'demo' && (
+                    <span
+                      className="inline-flex items-center gap-2 text-sm px-3 py-1 rounded-full font-mono bg-slate-700 text-white border border-slate-500/60"
+                      aria-label="Demo only"
+                      title="Demo: not reachable"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="opacity-90">
+                        <path d="M3 3l18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+                        <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2" opacity="0.6"/>
+                      </svg>
+                      Demo
+                    </span>
+                  )}
                   {project.isNew && (
                     <span className="bg-red-500 text-white text-sm px-3 py-1 rounded font-mono">
                       New
@@ -116,13 +336,17 @@ export default function Projects() {
 
               {/* Action buttons */}
               <div className="flex gap-4">
-                <a
-                  href={project.liveUrl}
-                  className="flex-1 terminal-border rounded-lg px-6 py-4 font-mono text-base bg-emerald-500 text-black hover:bg-emerald-400 transition-colors text-center flex items-center justify-center gap-2"
-                >
-                  <span>👁</span>
-                  {t('projects.viewProject')}
-                </a>
+                {statusById[project.id] === 'live' && (
+                  <a
+                    href={project.liveUrl}
+                    className="flex-1 terminal-border rounded-lg px-6 py-4 font-mono text-base bg-emerald-500 text-black hover:bg-emerald-400 transition-colors text-center flex items-center justify-center gap-2 shadow-[0_0_30px_rgba(16,185,129,0.35)]"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>👁</span>
+                    View Live
+                  </a>
+                )}
                 <a
                   href={project.githubUrl}
                   className="terminal-border rounded-lg px-6 py-4 font-mono text-base hover:bg-emerald-500/10 transition-colors text-center flex items-center justify-center gap-2"

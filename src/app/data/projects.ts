@@ -66,7 +66,7 @@ export const PROJECTS_DATA: Project[] = [
     liveUrl: '#',
     githubUrl: 'https://github.com/JustRascal00/CHATAI',
     image: '/projects/Website5.png',
-    isNew: true,
+    isNew: false,
     tags: ['projects.tags.ai', 'projects.tags.realtime', 'projects.tags.chat', 'projects.tags.fullstack'],
     bulletPoints: ['projects.bullet.ai', 'projects.bullet.realtime', 'projects.bullet.responsive']
   },
@@ -79,7 +79,7 @@ export const PROJECTS_DATA: Project[] = [
     liveUrl: '#',
     githubUrl: 'https://github.com/JustRascal00/Cv-Website',
     image: '/projects/Website6.png',
-    isNew: true
+    isNew: false
   },
   {
     id: 'webexplain',
