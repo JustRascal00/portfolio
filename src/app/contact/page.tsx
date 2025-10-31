@@ -87,43 +87,43 @@ export default function Contact() {
           <div className="space-y-8">
             <div>
               <h1 className="text-3xl font-mono font-bold text-emerald-400 mb-6">
-                Contact Information
+                {t('contact.title')}
                 <span className="animate-pulse">|</span>
               </h1>
               <p className="text-emerald-100/90 leading-relaxed font-mono text-sm">
-                Looking to bring your web application to life or scale your digital product? I help startups and teams turn ideas into production-ready solutions. From full-stack applications to AI-powered tools, I bring deep expertise and a builder&apos;s mindset to every collaboration.
+                {t('contact.description')}
               </p>
             </div>
 
             <div>
-              <h2 className="text-xl font-mono font-bold text-emerald-400 mb-4">Direct Contact</h2>
+              <h2 className="text-xl font-mono font-bold text-emerald-400 mb-4">{t('contact.directContact')}</h2>
               <div className="space-y-3 font-mono text-sm">
                 <div className="flex items-center gap-2">
                   <span className="text-emerald-700">$</span>
-                  <span className="text-emerald-300">email</span>
+                  <span className="text-emerald-300">{t('contact.email')}</span>
                   <span className="text-emerald-400">mamuka.khokerashvili00@gmail.com</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-emerald-700">$</span>
-                  <span className="text-emerald-300">phone</span>
+                  <span className="text-emerald-300">{t('contact.phone')}</span>
                   <span className="text-emerald-400">+995 551 21 55 57</span>
                 </div>
               </div>
             </div>
 
             <div>
-              <h2 className="text-xl font-mono font-bold text-emerald-400 mb-4">Social Links</h2>
+              <h2 className="text-xl font-mono font-bold text-emerald-400 mb-4">{t('contact.socialLinks')}</h2>
               <div className="space-y-3 font-mono text-sm">
                 <div className="flex items-center gap-2">
                   <span className="text-emerald-700">$</span>
-                  <span className="text-emerald-300">github</span>
+                  <span className="text-emerald-300">{t('contact.github')}</span>
                   <a href="https://github.com/JustRascal00" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 transition-colors">
                     github.com/JustRascal00
                   </a>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-emerald-700">$</span>
-                  <span className="text-emerald-300">linkedin</span>
+                  <span className="text-emerald-300">{t('contact.linkedin')}</span>
                   <a href="https://linkedin.com/in/mamuka-khokerashvili" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 transition-colors">
                     linkedin.com/in/mamuka-khokerashvili
                   </a>
@@ -134,42 +134,42 @@ export default function Contact() {
 
           {/* Right Section - Contact Form */}
           <div className="terminal-border rounded-lg p-8 bg-black/20">
-            <h2 className="text-2xl font-mono font-bold text-emerald-400 mb-8">Say hello!</h2>
+            <h2 className="text-2xl font-mono font-bold text-emerald-400 mb-8">{t('contact.form.title')}</h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-emerald-400 font-mono text-sm mb-2">Name</label>
+                <label className="block text-emerald-400 font-mono text-sm mb-2">{t('contact.form.name')}</label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  placeholder="Your Name"
+                  placeholder={t('contact.form.namePlaceholder')}
                   className="w-full px-4 py-3 bg-black/60 border border-emerald-400 rounded-md text-emerald-100 font-mono text-sm placeholder-emerald-500/60 focus:border-emerald-300 focus:outline-none focus:ring-1 focus:ring-emerald-300"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-emerald-400 font-mono text-sm mb-2">Email</label>
+                <label className="block text-emerald-400 font-mono text-sm mb-2">{t('contact.form.email')}</label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder="your@email.com"
+                  placeholder={t('contact.form.emailPlaceholder')}
                   className="w-full px-4 py-3 bg-black/60 border border-emerald-400 rounded-md text-emerald-100 font-mono text-sm placeholder-emerald-500/60 focus:border-emerald-300 focus:outline-none focus:ring-1 focus:ring-emerald-300"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-emerald-400 font-mono text-sm mb-2">Message</label>
+                <label className="block text-emerald-400 font-mono text-sm mb-2">{t('contact.form.message')}</label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Enter your message here..."
+                  placeholder={t('contact.form.messagePlaceholder')}
                   rows={6}
                   className="w-full px-4 py-3 bg-black/60 border border-emerald-400 rounded-md text-emerald-100 font-mono text-sm placeholder-emerald-500/60 focus:border-emerald-300 focus:outline-none focus:ring-1 focus:ring-emerald-300 resize-none"
                   required
@@ -181,18 +181,18 @@ export default function Contact() {
                 disabled={isSubmitting}
                 className="w-full bg-emerald-500 text-white font-mono font-bold py-3 px-6 rounded-md hover:bg-emerald-400 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? 'Sending...' : 'Submit'}
+                {isSubmitting ? t('contact.form.sending') : t('contact.form.submit')}
               </button>
               
               {submitStatus === 'success' && (
                 <div className="text-emerald-400 font-mono text-sm text-center">
-                  ✓ Message sent successfully! I&apos;ll get back to you soon.
+                  {t('contact.form.success')}
                 </div>
               )}
               
               {submitStatus === 'error' && (
                 <div className="text-red-400 font-mono text-sm text-center">
-                  ✗ Failed to send message. Please try again or email me directly.
+                  {t('contact.form.error')}
                 </div>
               )}
             </form>
