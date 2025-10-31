@@ -87,7 +87,7 @@ export const PROJECTS_DATA: Project[] = [
     categoryKey: 'projects.tags.ai',
     descriptionKey: 'projects.webExplain.description',
     techStack: ['Next.js', 'TypeScript', 'Redis/Upstash', 'NextUI', 'Tailwind CSS', 'LlamaIndex/RAG', 'Lucide Icons'],
-    liveUrl: '#',
+    liveUrl: 'https://webexplain.vercel.app',
     githubUrl: 'https://github.com/JustRascal00/webexplain',
     image: '/projects/Website7.png',
     isNew: true
