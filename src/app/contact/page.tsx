@@ -124,7 +124,7 @@ export default function Contact() {
                 <div className="flex items-center gap-2">
                   <span className="text-emerald-700">$</span>
                   <span className="text-emerald-300">{t('contact.linkedin')}</span>
-                  <a href="https://linkedin.com/in/mamuka-khokerashvili" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 transition-colors">
+                  <a href="linkedin.com/in/mamuka-khokerashvili-538893277" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:text-emerald-300 transition-colors">
                     linkedin.com/in/mamuka-khokerashvili
                   </a>
                 </div>
@@ -216,7 +216,7 @@ export default function Contact() {
               </svg>
             </a>
             <a
-              href="https://linkedin.com/in/mamuka-khokerashvili"
+              href="https://linkedin.com/in/mamuka-khokerashvili-538893277"
               target="_blank"
               rel="noopener noreferrer"
               className="text-emerald-400 hover:text-emerald-300 transition-colors"
