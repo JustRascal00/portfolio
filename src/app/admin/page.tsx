@@ -52,7 +52,7 @@ export default function AdminDashboard() {
         setMessage({ type: 'success', text: 'Login successful!' });
         fetchFeaturedProject();
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: 'error', text: 'Login failed!' });
     }
     
@@ -88,7 +88,7 @@ export default function AdminDashboard() {
       } else {
         setMessage({ type: 'error', text: data.error || 'Failed to update' });
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: 'error', text: 'Error updating featured project' });
     }
 
