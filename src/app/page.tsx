@@ -6,6 +6,7 @@ import Typewriter from "./components/Typewriter";
 import HologramPortrait from "./components/HologramPortrait";
 import PixelText from "./components/PixelText";
 import LanguageToggle from "./components/LanguageToggle";
+import GitHubContributionGraph from "./components/GitHubContributionGraph";
 import { useI18n } from "./components/i18n";
 import { PROJECTS_DATA, FEATURED_PROJECT_ID } from "./data/projects";
 
@@ -124,6 +125,12 @@ export default function Home() {
             {t('welcome.body')}
           </p>
         </section>
+
+        {/* GitHub Contribution Graph */}
+        <section className="mt-16">
+          <GitHubContributionGraph username="JustRascal00" />
+        </section>
+
         <section id="projects" className="mt-16">
           <div className="terminal-border rounded-md p-6 md:p-8">
             <p className="font-mono text-emerald-400 mb-3">{t('projects.featured')}</p>

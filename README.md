@@ -18,6 +18,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and configure:
+
+- `GITHUB_TOKEN` (optional): GitHub personal access token for fetching full contribution graph data
+  - Get your token from [GitHub Settings > Developer settings > Personal access tokens](https://github.com/settings/tokens)
+  - Token is optional - the app will work without it but with rate limits
+
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
 ## Learn More

@@ -191,6 +191,20 @@ const translations: Translations = {
   'contact.form.submit': { ka: 'გაგზავნა', en: 'Submit' },
   'contact.form.success': { ka: '✓ მესიჯი წარმატებით გაიგზავნა! მალე დაგიკავშირდები.', en: '✓ Message sent successfully! I&apos;ll get back to you soon.' },
   'contact.form.error': { ka: '✗ მესიჯის გაგზავნა ვერ მოხერხდა. გთხოვთ სცადოთ თავიდან ან მიწეროთ პირდაპირ.', en: '✗ Failed to send message. Please try again or email me directly.' },
+
+  // GitHub Contribution Graph
+  'github.loading': { ka: 'კონტრიბუციების ჩატვირთვა...', en: 'Loading contributions...' },
+  'github.activity': { ka: 'GitHub აქტივობა', en: 'GitHub Activity' },
+  'github.viewProfile': { ka: 'პროფილის ნახვა →', en: 'View Profile →' },
+  'github.total': { ka: 'სულ:', en: 'Total:' },
+  'github.contributions': { ka: 'კონტრიბუცია', en: 'contribution' },
+  'github.contributions.plural': { ka: 'კონტრიბუცია', en: 'contributions' },
+  'github.streak': { ka: 'სთრიქი ', en: 'Streak: ' },
+  'github.days': { ka: 'დღე', en: 'day' },
+  'github.days.plural': { ka: 'დღე', en: 'days' },
+  'github.less': { ka: 'ნაკლები', en: 'Less' },
+  'github.more': { ka: 'მეტი', en: 'More' },
+  'github.noData': { ka: 'კონტრიბუციის მონაცემები მიუწვდომელია', en: 'No contribution data available' },
 };
 
 type I18nContextType = {
