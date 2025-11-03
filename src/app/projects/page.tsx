@@ -207,12 +207,12 @@ export default function Projects() {
             <button onClick={()=>setStatusFilter('live')} className={`terminal-border rounded px-3 py-1 text-sm font-mono ${statusFilter==='live'?'bg-emerald-500/10 text-emerald-300':'text-emerald-300'}`}>Live</button>
             <button onClick={()=>setStatusFilter('demo')} className={`terminal-border rounded px-3 py-1 text-sm font-mono ${statusFilter==='demo'?'bg-emerald-500/10 text-emerald-300':'text-emerald-300'}`}>Demo</button>
             <span className="mx-2 h-5 w-px bg-emerald-700/40" />
-            <select value={techFilter} onChange={(e)=>setTechFilter(e.target.value as any)} className="terminal-border bg-black/30 text-emerald-200 text-sm font-mono rounded px-2 py-1">
+            <select value={techFilter} onChange={(e)=>setTechFilter(e.target.value as string | 'all')} className="terminal-border bg-black/30 text-emerald-200 text-sm font-mono rounded px-2 py-1">
               <option value="all">All Tech</option>
               {allTechs.map(t => <option key={t} value={t}>{t}</option>)}
             </select>
             <span className="mx-2 h-5 w-px bg-emerald-700/40" />
-            <select value={sortBy} onChange={(e)=>setSortBy(e.target.value as any)} className="terminal-border bg-black/30 text-emerald-200 text-sm font-mono rounded px-2 py-1">
+            <select value={sortBy} onChange={(e)=>setSortBy(e.target.value as 'new' | 'live' | 'az')} className="terminal-border bg-black/30 text-emerald-200 text-sm font-mono rounded px-2 py-1">
               <option value="new">New first</option>
               <option value="live">Live first</option>
               <option value="az">A–Z</option>
